@@ -233,7 +233,8 @@ app.put('/stations', function (req, res) {
    connection.query('UPDATE `station` SET `lat`=?,`external_id`=?, `capacity` =?, `lon` =?,`eightd_station_services` =?,`station_type` =?,`rental_methods` =?, `electric_bike_surcharge_waiver` =?,`rental_url` =?,`region_id` =?,`has_kiosk` =?,`name` =?,`short_name` =?,`legacy_id` =?,`eightd_has_key_dispenser` =?, where `station_id`=?', [req.body.station_id, req.body.lat, req.body.external_id, req.body.capacity, req.body.lon, req.body.eightd_station_services, req.body.station_type, req.body.rental_methods, req.body.electric_bike_surcharge_waiver, req.body.rental_url, req.body.region_id, req.body.has_kiosk, req.body.name, req.body.short_name,  req.body.legacy_id, req.body.eightd_has_key_dispenser], function (error, results, fields) {
 	  if (error) throw error;
 	  res.end(JSON.stringify(results));
-	});
+	})
+
 });
 
 //rest api to delete user from mysql database
