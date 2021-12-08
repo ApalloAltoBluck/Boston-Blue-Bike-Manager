@@ -1,6 +1,11 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import { Link } from "react-router-dom";
+
+// import EditStation from "./components/stations/EditStation";
+// import CreateStation from "./components/stations/StationTable";
+
 // TO DO
 // -turn each table into a react component that is fed a server response, and returns all values
 // mapped over and stylized
@@ -16,7 +21,6 @@ export default function StationTable() {
 
   return (
     <div className="">
-        {console.log(station)}
                 <h1>
         STATIONS
         </h1>
@@ -57,9 +61,14 @@ export default function StationTable() {
                       <td> {station[i].region_id} </td>
                       <td> {station[i].has_kiosk} </td>
                       <td> {station[i].legacy_id} </td>
-
+                      < Link to={`/stations/edit/${station[i].station_id}`} className="btn btn-warning"> 
+                EDIT
+            </Link>
                     </tr>
+                  
                 ))}
+                                      < Link to={`/stations/create`} className="btn btn-primary"> CREATE STATION</Link>
+
         </table>
     </div>
   );

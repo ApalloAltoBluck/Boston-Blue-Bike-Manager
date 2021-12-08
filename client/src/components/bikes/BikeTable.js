@@ -1,5 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Link , HashRouter, Routes, Route} from "react-router-dom";
 
 // TO DO
 // -turn each table into a react component that is fed a server response, and returns all values
@@ -34,9 +35,14 @@ export default function BikeTable() {
                       <td> {bikes[i].inUse} </td>
                       <td> {bikes[i].user} </td>
                       <td> {bikes[i].station_id} </td>
+                      <td> {bikes[i].bikeID} </td>
+                      <td> < Link to={`/bikes/edit/${bikes[i].bikeID}`} className="btn btn-warning"> 
+                      EDIT </Link> </td>
+
                     </tr>
                 ))}
         </table>
+        <Link className="btn btn-primary" to="/bikes/create">ADD BIKE</Link>
     </div>
   );
 }
