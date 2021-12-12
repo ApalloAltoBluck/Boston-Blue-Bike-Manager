@@ -9,3 +9,9 @@ For our final, we based our CRUD application on the Boston Blue Bike API. This a
   user= (eg:root)
   password= (eg:your_password)
   database= (eg:my_final_password)`
+  
+### HOW TO START
+- Launch two terminals
+- Terminal one: `npm install` then `npm start`
+- Terminal two: `cd client` then `npm install` then `npm start`
+
