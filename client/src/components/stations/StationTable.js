@@ -27,7 +27,7 @@ export default function StationTable() {
         <table className="">
           <tr>
             <th>Station Id</th>
-            <th>Exteneral Id</th>
+            <th>External Id</th>
 
             <th>Station in use</th>
             <th>SHORT NAME</th>

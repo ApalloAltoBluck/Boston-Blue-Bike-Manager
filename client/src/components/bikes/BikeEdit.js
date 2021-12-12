@@ -4,17 +4,26 @@ import bootstrap from "bootstrap";
 
 import { findBikeById,  updateBike, deleteBike} from "./bike-services";
 
+import { findStationById } from "../stations/station-services";
+
 function BikeEdit() {
   const params = useParams();
   const [bike, setBike] = React.useState(null);
+
+  const [associatedStation, setAssociatedStation] = React.useState(null);
+  const [associatedUser, setAssociatedUser] = React.useState(null);
+
 
   React.useEffect(() => {
     findBikeById(params.id)
       .then((res) => setBike(res[0]))
   }, []);
 
+  
+
   return (
-    <header className="App-header">
+    <header className="App-header row">
+      <div className="col">
       <h1>bike {params.id} EDIT</h1>
       {console.log(bike)}
       {!bike ? (
@@ -36,7 +45,8 @@ function BikeEdit() {
               }))
             }
           />
-          <br />
+          <br />          <br />
+
           <label for="lastName">User</label>
           <input
             name="user"
@@ -50,7 +60,8 @@ function BikeEdit() {
               }))
             }
           />
-          <br />
+          <br />          <br />
+
           <label for="station_id">Station ID</label>
           <input
             name="station_id"
@@ -62,14 +73,12 @@ function BikeEdit() {
                 station_id: e.target.value,
               }))
             }
-          />
+          />  <br /> <br />
+
+<Link to="station_id">EDIT ID</Link>
           <br />
          
-
-          <tr>
-            <th>{}</th>
-            <th>{}</th>
-          </tr>
+          <div className="m-5 " />
           <a
             href="/"
             className="btn btn-DANGER"
@@ -86,6 +95,16 @@ function BikeEdit() {
           <a href="/">BACK</a>
         </>
       )}
+      </div>
+      <div className=" col float-right">
+        {bike &&     <> <h1>Station associated with bike</h1>
+        <Link to={`/stations/edit/${bike.station_id}`}>STATION {bike.station_id}</Link></>}
+   
+
+        {bike && <>        <h1>User associated with bike</h1>
+        <Link to={`/users/edit/${bike.user}`}>USER {bike.user}</Link></>}
+
+      </div>
     </header>
   );
 }

@@ -2,13 +2,17 @@ import React from "react";
 import { Link, HashRouter, useParams, Route } from "react-router-dom";
 import bootstrap from "bootstrap";
 
-import { findUserById, updateUser, deleteUser } from "./user-services";
+import { findUserById, updateUser, deleteUser, findBikeByUser } from "./user-services";
+
 
 function UserEdit() {
   const params = useParams();
   const [user, setUser] = React.useState(null);
 
+
   const [userCopy, setUserCopy] = React.useState(null);
+
+  const [bike, setBike] = React.useState(null)
 
   React.useEffect(() => {
     findUserById(params.id)
@@ -16,14 +20,21 @@ function UserEdit() {
       .then(setUser(userCopy));
   }, []);
 
+  React.useEffect(() => {
+    findBikeByUser(params.id)
+      .then((res) => setBike(res))
+  }, []);
+
+
   return (
-    <header className="App-header">
-      <h1>USER {params.id} EDIT</h1>
+    <header className="App-header row">
       {console.log(userCopy)}
       {!userCopy ? (
         "Loading..."
       ) : (
-        <>
+        <div className="col">
+              <h1>USER {params.id} EDIT</h1>
+
           <label for="firstName">First Name:</label>
           <input
             type="text"
@@ -118,10 +129,7 @@ function UserEdit() {
               .slice(0, 10)}
           />
 
-          <tr>
-            <th>{}</th>
-            <th>{}</th>
-          </tr>
+
           <a
             href="/"
             className="btn btn-DANGER"
@@ -136,8 +144,12 @@ function UserEdit() {
             CONFIRM EDITS
           </a>
           <a href="/">BACK</a>
-        </>
+        </div>
       )}
+      <div className="col float-right">
+        <h1>ASSOCIATED BIKE</h1>
+        {bike && <Link to={`/bikes/edit/${bike[0].bikeID}`}>EDIT BIKE {bike[0].bikeID}</Link>}
+      </div>
     </header>
   );
 }

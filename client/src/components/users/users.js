@@ -23,7 +23,7 @@ function App() {
 
   return (
     <HashRouter className="">
-      <header className="App-header">
+      <div className="App-header">
         <h1>USERS</h1>
         <table className="">
           <tr>
@@ -54,8 +54,8 @@ function App() {
                 </>
               ))}
         </table>
-
-      </header>
+            
+      </div>
     </HashRouter>
   );
 }

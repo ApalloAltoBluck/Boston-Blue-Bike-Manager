@@ -4,6 +4,8 @@ import bootstrap from "bootstrap";
 
 import stationServices, { findStationById,  updateStation, deleteStation} from "./station-services.js";
 
+import { findAllBikes, findBikeById } from "../bikes/bike-services.js"; 
+
 function BikeEdit() {
   const params = useParams();
   const [station, setStation] = React.useState(null);
@@ -13,14 +15,26 @@ function BikeEdit() {
       .then((res) => setStation(res[0]))
   }, []);
 
+  const [bikes, setBikes] = React.useState(null);
+
+
+  React.useEffect(() => {
+    findAllBikes().then((res) => setBikes(res.message))
+  }, []
+  )  
+
   return (
     <header className="App-header">
-      <h1>Station {params.id} EDIT</h1>
-      {console.log(station)}
+
+      <div className="row">
+
       {!station ? (
         "Loading..."
       ) : (
         <>
+        <div className="col">
+        <h1>Station {params.id} EDIT</h1>
+
            <label for="ex_id">External Id</label>
           <input
             type="text"
@@ -197,10 +211,7 @@ function BikeEdit() {
           />
 
             <br />
-<tr>
-            <th>{}</th>
-            <th>{}</th>
-          </tr>
+  
         
           <a
             href="/"
@@ -216,7 +227,25 @@ function BikeEdit() {
             CONFIRM EDITS
           </a> 
           <a href="/">BACK</a> 
+          </div>
+          <div className="col">
+        <div className="associated-data">
+              <h1>BIKES ASSOCIATED WITH STATION</h1>
+              <ul>
+            {!bikes
+              ? "Loading..."
+              : Object.entries(bikes).map((keyName, i) => (
+
+                bikes[i].station_id == params.id &&
+                   <li> <Link to={`/bikes/edit/${bikes[i].bikeID}`} >BIKE {bikes[i].bikeID}</Link> </li>
+                  
+                ))}
+                </ul>
+            </div>
+        </div>
         </>)}
+        </div>
+
     </header>
   );
 }

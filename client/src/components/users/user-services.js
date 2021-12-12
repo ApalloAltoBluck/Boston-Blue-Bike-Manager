@@ -13,6 +13,11 @@ export const findUserById = (id) =>
     .then(response => response.json())
 
 
+    // TODO: retrieve a single user by their ID
+export const findBikeByUser = (id) =>
+fetch(`/bikes/${id}`)
+.then(response => response.json())
+
 // TODO: delete a user by their ID
 export const deleteUser = (id) =>
     fetch(`${USERS_URL}/${id}`, {

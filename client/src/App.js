@@ -9,6 +9,7 @@ import CreateStation from "./components/stations/createstation"
 import StationEdit from "./components/stations/stationedit"
 import EditUser from "./components/users/useredit"
 import CreateUser from "./components/users/createuser"
+import "./App.css";
 
 import React from "react";
 import { Link , HashRouter, Routes, Route} from "react-router-dom";
@@ -33,8 +34,10 @@ function HomePage() {
   return (
     <header className="App-header">
     <h1>USERS</h1>
-    <table className="">
+    <table id="table-example-1">
       <tr>
+      <th>User ID</th>
+
         <th>First Name</th>
         <th>Last Name</th>
         <th>Membership type</th>
@@ -50,6 +53,8 @@ function HomePage() {
           <>
           {console.log(users)}
               <tr key={i}>
+              <td>{users[i].userID}</td>
+
                 <td>{users[i].firstName}</td>
                 <td>{users[i].lastName}</td>
                 <td>{users[i].membership}</td>

@@ -25,7 +25,7 @@ export default function BikeTable() {
             <th>Bike Id</th>
             <th>Bike in use</th>
             <th>User</th>
-            <th>Station ID</th>
+            <th>station last Docked At</th>
           </tr>
             {!bikes
               ? "Loading..."

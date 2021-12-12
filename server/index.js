@@ -1,4 +1,5 @@
 const express = require("express");
+require('dotenv').config();
 
 const PORT = process.env.PORT || 3001;
 var bodyParser = require("body-parser");
@@ -6,13 +7,17 @@ var bodyParser = require("body-parser");
 const app = express();
 var jsonParser = bodyParser.json();
 
+
+
 var mysql = require("mysql");
 
+
+// ADD development.ENV file to create connection
 var connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "your_password",
-  database: "final_project",
+  host: process.env.host,
+  user: process.env.user,
+  password: process.env.password,
+  database: process.env.database,
 });
 
 connection.connect();
@@ -32,6 +37,19 @@ app.get("/users", (req, res) => {
 app.get("/users/:userID", function (req, res) {
   connection.query(
     "select * from users where userID=?",
+    [req.params.userID],
+    function (error, results, fields) {
+      if (error) throw error;
+      res.end(JSON.stringify(results));
+    }
+  );
+});
+
+
+// find bike by user id 
+app.get("/bikes/user/:userID", function (req, res) {
+  connection.query(
+    "select * from bikes where user=?",
     [req.params.userID],
     function (error, results, fields) {
       if (error) throw error;
@@ -105,8 +123,8 @@ app.post('/users', jsonParser, function (req, res) {
 app.post('/bikes', jsonParser, function (req, res) {
   connection.query('INSERT INTO bikes SET `inUse`=?,`user`=?, `station_id`=?', [
     req.body.inUse,
-    req.body.user,
-    req.body.station_id,
+    parseInt(req.body.user),
+    parseInt(req.body.station_id),
   ], function (error, results, fields) {
    if (error) throw error;
    res.end(JSON.stringify(results));
@@ -146,6 +164,8 @@ app.put("/bikes/edit/:id", jsonParser, function (req, res) {
     }
   );
 });
+
+
 
 // delete bike for a certain ID
 app.delete("/bikes/:id", jsonParser, function (req, res) {
