@@ -5,7 +5,7 @@ For our final, we based our CRUD application on the Boston Blue Bike API. This a
 ### HOW TO CONNECT TO DATABASE
 
 - create a .env file at the root of the project with the following values
-  host= (eg:localhost)
+  `host= (eg:localhost)
   user= (eg:root)
   password= (eg:your_password)
-  database= (eg:my_final_password)
+  database= (eg:my_final_password)`
