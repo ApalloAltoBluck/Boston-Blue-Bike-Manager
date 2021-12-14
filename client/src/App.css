@@ -2,3 +2,11 @@
     float:right;
     margin-right:10vw;
 }
+
+.custom-nav {
+    background-color:#ffc107;
+}
+
+.nav-link {
+    font-weight:400;
+}

@@ -42,7 +42,7 @@ export default function BikeTable() {
                     </tr>
                 ))}
         </table>
-        <Link className="btn btn-primary" to="/bikes/create">ADD BIKE</Link>
+        <Link className="btn btn-warning" to="/bikes/create">CREATE BIKE</Link>
     </div>
   );
 }

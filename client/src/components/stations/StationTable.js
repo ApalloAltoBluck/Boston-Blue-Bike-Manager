@@ -67,7 +67,7 @@ export default function StationTable() {
                     </tr>
                   
                 ))}
-                                      < Link to={`/stations/create`} className="btn btn-primary"> CREATE STATION</Link>
+                                      < Link to={`/stations/create`} className="btn btn-warning"> CREATE STATION</Link>
 
         </table>
     </div>

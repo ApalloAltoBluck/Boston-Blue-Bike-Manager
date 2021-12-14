@@ -15,6 +15,8 @@ import React from "react";
 import { Link , HashRouter, Routes, Route} from "react-router-dom";
 import bootstrap from "bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/js/bootstrap";
+
 
 // TO DO
 // -turn each table into a react component that is fed a server response, and returns all values
@@ -33,6 +35,26 @@ function HomePage() {
 
   return (
     <header className="App-header">
+      <nav class="navbar navbar-expand-lg navbar-light custom-nav">
+  <h1 class="navbar-brand my-auto text-light" href="#">BLUE BIKE MANAGER</h1>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav text-light">
+      <li class="nav-itemactive ">
+        <a class="nav-link text-light" href="#/users/create">ADD USER</a>
+      </li>
+      <li class="nav-item   ">
+        <a class="nav-link text-light" href="#/bikes/create">ADD BIKE</a>
+      </li>
+      <li class="nav-item  ">
+        <a class="nav-link text-light" href="#/stations/create">ADD STATION</a>
+      </li>
+
+    </ul>
+  </div>
+</nav>  
     <h1>USERS</h1>
     <table id="table-example-1">
       <tr>
@@ -71,7 +93,7 @@ function HomePage() {
            
             </>
           ))}
-                      < Link to={`/users/create`} className="btn btn-primary"> CREATE USER</Link>
+                      < Link to={`/users/create`} className="btn btn-warning"> CREATE USER</Link>
 
     </table>
 

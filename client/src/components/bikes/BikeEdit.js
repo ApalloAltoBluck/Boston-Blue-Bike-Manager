@@ -97,11 +97,11 @@ function BikeEdit() {
       )}
       </div>
       <div className=" col float-right">
-        {bike &&     <> <h1>Station associated with bike</h1>
+        {  bike && bike.station_id &&     <> <h1>Station associated with bike</h1>
         <Link to={`/stations/edit/${bike.station_id}`}>STATION {bike.station_id}</Link></>}
    
 
-        {bike && <>        <h1>User associated with bike</h1>
+        {bike && bike.user &&<> <h1>User associated with bike</h1>
         <Link to={`/users/edit/${bike.user}`}>USER {bike.user}</Link></>}
 
       </div>

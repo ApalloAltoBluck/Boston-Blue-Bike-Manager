@@ -64,7 +64,7 @@ function CreateBike() {
         </tr>
         <a
           href="/"
-          className="btn btn-DANGER"
+          className="btn btn-warning"
           onClick={() => createBike(bike, params.id)}
         >
           CREATE BIKE

@@ -147,13 +147,11 @@ app.get("/bikes/:bikeID", function (req, res) {
 // BIKES
 // UPDATE A BIKE for an ID
 app.put("/bikes/edit/:id", jsonParser, function (req, res) {
-  console.log(req);
-
   connection.query(
     "UPDATE `bikes` SET `inUse`=?,`user`=?, `station_id` =? WHERE `bikeID`=?",
     [
       req.body.inUse,
-      req.body.user,
+      parseInt(req.body.user) > 0 ? parseInt(req.body.user) : null,
       req.body.station_id,
       req.params.id
 
