@@ -9,7 +9,7 @@ For our final, we based our CRUD application on the Boston Blue Bike API. This a
 - We utilized the publicly available Bluebikes System Data in order to create a database which accurately represents the usage of the Bluebikes transportation system.Specifically, we used the Station and Bikes API’s. 
 
 ### USER DESCRIPTION
-- A typical user would be someone who is looking to use a bluebike and wants to see the current status of bluebikes in their area. \
+- A typical user would be someone who is looking to use a bluebike and wants to see the current status of bluebikes in their area. 
 
 ### DOMAIN OBJECTS DESCRIPTION
 - Bike - a representation of a single blue bike in the system. It has four attributes: an integer bikeID(pk), a boolean inUse, an int lastRider, and an int stationID. BikeID serves as a unique identifier for each blue bike, and also is used as a primary key. inUse signifies whether the bike is currently being ridden (meaning that it has already been checked out). lastRider represents the userID of the last user who had checked out the bike. StationID represents the id of the bike dock last used or currently using.
