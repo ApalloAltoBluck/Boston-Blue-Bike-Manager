@@ -3,17 +3,32 @@ import { Link, HashRouter, useParams, Route } from "react-router-dom";
 import bootstrap from "bootstrap";
 
 import { createBike } from "./bike-services";
+import { findStationById, findAllStations} from "../stations/station-services";
+import { findAllUsers } from "../users/user-services";
 
 function CreateBike() {
   const params = useParams();
 
-  const [bike, setBike] = React.useState({bikeId:66, inUse: 0,
-  station_id:1});
+
+  const [availableStation, setAvailableStation] = React.useState(null);
+  const [availableUser, setAvailableUser] = React.useState(null);
+  React.useEffect(() => {
+    findAllStations().then((response) => setAvailableStation(response.message.map(({ station_id }) => station_id)))
+    findAllUsers().then((response) => setAvailableUser(response.message.map(({userID}) => userID)))
+  }, []) ;
+
+  const [bike, setBike] = React.useState({bikeId:66, inUse: 0, user: (availableUser ? availableUser[0] : null), station: (availableStation?  availableStation[0] : null )});
+
+
+
 
   return (
     <header className="App-header">
-    <h1>bike {params.id} EDIT</h1>
-    {console.log(bike)}
+
+    <h1>bike {params.id} CREATE</h1>
+    {console.log(availableStation)}
+    {console.log(availableUser)}
+
     {!bike ? (
       "Loading..."
     ) : (
@@ -33,7 +48,7 @@ function CreateBike() {
         />
         <br />
         <label for="lastName">User</label>
-        <input
+        {/* <input
           name="user"
           defaultValue={bike.user}
           onChange={(e) =>
@@ -42,19 +57,28 @@ function CreateBike() {
               user: e.target.value,
             }))
           }
-        />
+        /> */}
+        <select name="user" id="user"        defaultValue={bike.user}
+          onChange={(e) =>
+            setBike((bike) => ({
+              ...bike,
+              user: e.target.value,
+            }))
+          }>
+         {availableUser && availableUser.map((user) => <option value={user}>{user}</option> )}
+        </select>
         <br />
         <label for="station_id">Station ID</label>
-        <input
-          name="station_id"
+                <select     name="station_id"
           defaultValue={bike.station_id}
           onChange={(e) =>
             setBike((bike) => ({
               ...bike,
               station_id: e.target.value,
             }))
-          }
-        />
+          }>
+         {availableStation && availableStation.map((station) => <option value={station}>{station}</option> )}
+        </select>
         <br />
        
 

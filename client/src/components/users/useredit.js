@@ -148,7 +148,7 @@ function UserEdit() {
       )}
       <div className="col float-right">
         <h1>ASSOCIATED BIKE</h1>
-        {bike && <Link to={`/bikes/edit/${bike[0].bikeID}`}>EDIT BIKE {bike[0].bikeID}</Link>}
+        {bike && bike[0] !== undefined && <Link to={`/bikes/edit/${bike[0].bikeID}`}>EDIT BIKE {bike[0].bikeID}</Link>}
       </div>
     </header>
   );

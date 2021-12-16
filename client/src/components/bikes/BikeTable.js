@@ -23,9 +23,9 @@ export default function BikeTable() {
         <table className="">
           <tr>
             <th>Bike Id</th>
-            <th>Bike in use</th>
-            <th>User</th>
-            <th>station last Docked At</th>
+            <th>| Bike in use</th>
+            <th>| User</th>
+            <th>| Station last Docked At</th>
           </tr>
             {!bikes
               ? "Loading..."
@@ -35,7 +35,6 @@ export default function BikeTable() {
                       <td> {bikes[i].inUse} </td>
                       <td> {bikes[i].user} </td>
                       <td> {bikes[i].station_id} </td>
-                      <td> {bikes[i].bikeID} </td>
                       <td> < Link to={`/bikes/edit/${bikes[i].bikeID}`} className="btn btn-warning"> 
                       EDIT </Link> </td>
 

@@ -119,12 +119,12 @@ app.post('/users', jsonParser, function (req, res) {
 });
 
 
-// display all bikes - findall
+// create new bike
 app.post('/bikes', jsonParser, function (req, res) {
   connection.query('INSERT INTO bikes SET `inUse`=?,`user`=?, `station_id`=?', [
     req.body.inUse,
-    parseInt(req.body.user),
-    parseInt(req.body.station_id),
+    req.body.user,
+    req.body.station_id,
   ], function (error, results, fields) {
    if (error) throw error;
    res.end(JSON.stringify(results));
@@ -151,7 +151,7 @@ app.put("/bikes/edit/:id", jsonParser, function (req, res) {
     "UPDATE `bikes` SET `inUse`=?,`user`=?, `station_id` =? WHERE `bikeID`=?",
     [
       req.body.inUse,
-      parseInt(req.body.user) > 0 ? parseInt(req.body.user) : null,
+      req.body.user,
       req.body.station_id,
       req.params.id
 
