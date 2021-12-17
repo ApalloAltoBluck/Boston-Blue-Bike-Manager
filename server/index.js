@@ -1,5 +1,5 @@
 const express = require("express");
-require('dotenv').config();
+require("dotenv").config();
 
 const PORT = process.env.PORT || 3001;
 var bodyParser = require("body-parser");
@@ -7,10 +7,7 @@ var bodyParser = require("body-parser");
 const app = express();
 var jsonParser = bodyParser.json();
 
-
-
 var mysql = require("mysql");
-
 
 // ADD development.ENV file to create connection
 var connection = mysql.createConnection({
@@ -31,8 +28,6 @@ app.get("/users", (req, res) => {
   });
 });
 
-
-
 // find user by specific ID
 app.get("/users/:userID", function (req, res) {
   connection.query(
@@ -45,8 +40,7 @@ app.get("/users/:userID", function (req, res) {
   );
 });
 
-
-// find bike by user id 
+// find bike by user id
 app.get("/bikes/user/:userID", function (req, res) {
   connection.query(
     "select * from bikes where user=?",
@@ -58,23 +52,19 @@ app.get("/bikes/user/:userID", function (req, res) {
   );
 });
 
-
 // select all bikes - findall
 app.get("/bikes", (req, res) => {
-
-connection.query("select * from bikes", function (err, rows, fields) {
-  if (err) throw err;
+  connection.query("select * from bikes", function (err, rows, fields) {
+    if (err) throw err;
 
     res.json({ message: rows });
+  });
 });
-});
-
 
 // select all stations - findall
 app.get("/stations", (req, res) => {
-
-connection.query("select * from stations", function (err, rows, fields) {
-  if (err) throw err;
+  connection.query("select * from stations", function (err, rows, fields) {
+    if (err) throw err;
 
     res.json({ message: rows });
   });
@@ -103,34 +93,36 @@ app.put("/users/edit/:id", jsonParser, function (req, res) {
 });
 
 // add a new user to the users table
-app.post('/users', jsonParser, function (req, res) {
-  connection.query('INSERT INTO users SET `firstName`=?,`lastName`=?, `username` =?, `password` =?,`email` =?,`dateOfBirth` =?,`membership` =?', [
-    req.body.firstName,
-    req.body.lastName,
-    req.body.username,
-    req.body.password,
-    req.body.email,
-    new Date(req.body.dateOfBirth).toISOString().slice(0, 10),
-    req.body.membership,
-  ], function (error, results, fields) {
-   if (error) throw error;
-   res.end(JSON.stringify(results));
- });
+app.post("/users", jsonParser, function (req, res) {
+  connection.query(
+    "INSERT INTO users SET `firstName`=?,`lastName`=?, `username` =?, `password` =?,`email` =?,`dateOfBirth` =?,`membership` =?",
+    [
+      req.body.firstName,
+      req.body.lastName,
+      req.body.username,
+      req.body.password,
+      req.body.email,
+      new Date(req.body.dateOfBirth).toISOString().slice(0, 10),
+      req.body.membership,
+    ],
+    function (error, results, fields) {
+      if (error) throw error;
+      res.end(JSON.stringify(results));
+    }
+  );
 });
-
 
 // create new bike
-app.post('/bikes', jsonParser, function (req, res) {
-  connection.query('INSERT INTO bikes SET `inUse`=?,`user`=?, `station_id`=?', [
-    req.body.inUse,
-    req.body.user,
-    req.body.station_id,
-  ], function (error, results, fields) {
-   if (error) throw error;
-   res.end(JSON.stringify(results));
- });
+app.post("/bikes", jsonParser, function (req, res) {
+  connection.query(
+    "INSERT INTO bikes SET `inUse`=?,`user`=?, `station_id`=?",
+    [req.body.inUse, req.body.user, req.body.station_id],
+    function (error, results, fields) {
+      if (error) throw error;
+      res.end(JSON.stringify(results));
+    }
+  );
 });
-
 
 // display a bike for a certain ID
 app.get("/bikes/:bikeID", function (req, res) {
@@ -149,21 +141,13 @@ app.get("/bikes/:bikeID", function (req, res) {
 app.put("/bikes/edit/:id", jsonParser, function (req, res) {
   connection.query(
     "UPDATE `bikes` SET `inUse`=?,`user`=?, `station_id` =? WHERE `bikeID`=?",
-    [
-      req.body.inUse,
-      req.body.user,
-      req.body.station_id,
-      req.params.id
-
-    ],
+    [req.body.inUse, req.body.user, req.body.station_id, req.params.id],
     function (error, results, fields) {
       if (error) throw error;
       res.end(JSON.stringify(results));
     }
   );
 });
-
-
 
 // delete bike for a certain ID
 app.delete("/bikes/:id", jsonParser, function (req, res) {
@@ -245,8 +229,7 @@ app.put("/stations/edit/:id", jsonParser, function (req, res) {
       req.body.eightd_has_key_dispenser,
       req.body.region_id,
       req.body.has_kiosk,
-      req.params.id
-
+      req.params.id,
     ],
     function (error, results, fields) {
       if (error) throw error;
@@ -276,7 +259,6 @@ app.post("/stations", jsonParser, function (req, res) {
       req.body.region_id,
       req.body.has_kiosk,
       req.body.station_id,
-
     ],
     function (error, results, fields) {
       if (error) throw error;
@@ -284,7 +266,6 @@ app.post("/stations", jsonParser, function (req, res) {
     }
   );
 });
-
 
 app.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);

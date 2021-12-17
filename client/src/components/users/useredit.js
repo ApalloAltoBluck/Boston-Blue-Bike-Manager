@@ -5,15 +5,13 @@ import bootstrap from "bootstrap";
 import { findUserById, updateUser, deleteUser } from "./user-services";
 import { findAllBikes } from "../bikes/bike-services";
 
-
 function UserEdit() {
   const params = useParams();
   const [user, setUser] = React.useState(null);
 
-
   const [userCopy, setUserCopy] = React.useState(null);
 
-  const [bike, setBike] = React.useState(null)
+  const [bike, setBike] = React.useState(null);
 
   React.useEffect(() => {
     findUserById(params.id)
@@ -22,9 +20,13 @@ function UserEdit() {
   }, []);
 
   React.useEffect(() => {
-    findAllBikes().then((response) => response.message.map((bike) => bike.user == params.id? setBike(bike.bikeID) : console.log(bike)))
+    findAllBikes().then((response) =>
+      response.message.map((bike) =>
+        bike.user == params.id ? setBike(bike.bikeID) : console.log(bike)
+      )
+    );
   }, []);
-  console.log(bike)
+  console.log(bike);
 
   return (
     <header className="App-header row">
@@ -33,7 +35,7 @@ function UserEdit() {
         "Loading..."
       ) : (
         <div className="col">
-              <h1>USER {params.id} EDIT</h1>
+          <h1>USER {params.id} EDIT</h1>
 
           <label for="firstName">First Name:</label>
           <input
@@ -129,7 +131,6 @@ function UserEdit() {
               .slice(0, 10)}
           />
 
-
           <a
             href="/"
             className="btn btn-DANGER"
@@ -137,7 +138,8 @@ function UserEdit() {
           >
             DELETE
           </a>
-          <a href="/"
+          <a
+            href="/"
             className="btn btn-primary"
             onClick={() => updateUser(params.id, userCopy)}
           >

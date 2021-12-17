@@ -116,7 +116,6 @@ function App() {
           </Route>
           <Route element={<BikeEdit />} exact={true} path="/bikes/edit/:id">
           </Route>
-
           <Route element={<CreateBike />} exact={true} path="/bikes/create">
           </Route>
           <Route element={<CreateStation />} exact={true} path="/stations/create">

@@ -1,9 +1,8 @@
 import logo from "./logo.svg";
 import "./App.css";
 
-
 import React from "react";
-import { Link , HashRouter} from "react-router-dom";
+import { Link, HashRouter } from "react-router-dom";
 import bootstrap from "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -38,7 +37,7 @@ function App() {
           {!users
             ? "Loading..."
             : Object.entries(users).map((keyName, i) => (
-              <>
+                <>
                   <tr>
                     <td>{users[i].firstName}</td>
                     <td>{users[i].lastName}</td>
@@ -48,13 +47,10 @@ function App() {
                     <td>{users[i].password}</td>
                     <td>{users[i].dateOfBirth}</td>
                   </tr>
-                 <Link to={`/users/${users[i].userID}`}>
-                    EDIT
-                </Link>
+                  <Link to={`/users/${users[i].userID}`}>EDIT</Link>
                 </>
               ))}
         </table>
-            
       </div>
     </HashRouter>
   );
