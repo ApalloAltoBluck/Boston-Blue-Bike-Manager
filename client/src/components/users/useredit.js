@@ -2,7 +2,8 @@ import React from "react";
 import { Link, HashRouter, useParams, Route } from "react-router-dom";
 import bootstrap from "bootstrap";
 
-import { findUserById, updateUser, deleteUser, findBikeByUser } from "./user-services";
+import { findUserById, updateUser, deleteUser } from "./user-services";
+import { findAllBikes } from "../bikes/bike-services";
 
 
 function UserEdit() {
@@ -21,10 +22,9 @@ function UserEdit() {
   }, []);
 
   React.useEffect(() => {
-    findBikeByUser(params.id)
-      .then((res) => setBike(res))
+    findAllBikes().then((response) => response.message.map((bike) => bike.user == params.id? setBike(bike.bikeID) : console.log(bike)))
   }, []);
-
+  console.log(bike)
 
   return (
     <header className="App-header row">
@@ -148,7 +148,7 @@ function UserEdit() {
       )}
       <div className="col float-right">
         <h1>ASSOCIATED BIKE</h1>
-        {bike && bike[0] !== undefined && <Link to={`/bikes/edit/${bike[0].bikeID}`}>EDIT BIKE {bike[0].bikeID}</Link>}
+        {bike && <Link to={`/bikes/edit/${bike}`}>EDIT BIKE {bike}</Link>}
       </div>
     </header>
   );
